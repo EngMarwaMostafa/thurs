@@ -49,14 +49,12 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   double? _ratingValue;
 
-  final detailsController = Get.put(ProductDetailsController());
-
-  final cartController = Get.put(CartController());
   final controller = Get.put(ProductsController());
 
   Color currentColor = Colors.green;
 
   List<Color> currentColors = [];
+
 
   void changeColor(Color color) => setState(() => currentColor = color);
 
@@ -67,7 +65,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Obx(
-      () => detailsController.load.value
+      () => controller.detailsController.load.value
           ? Center(
               child: CircularProgressIndicator(),
             )
@@ -83,10 +81,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
                         physics: BouncingScrollPhysics(),
-                        itemCount: detailsController
+                        itemCount: controller.detailsController
                             .future!.data!.productImage!.length,
                         itemBuilder: (_, index) => Image.network(
-                          detailsController
+                          controller.detailsController
                               .future!.data!.productImage![index].image!,
                         ),
                       )),
@@ -107,7 +105,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 Padding(
                   padding: EdgeInsets.only(left: 20.w),
                   child: Text(
-                    detailsController.future!.data!.name!,
+                    controller.detailsController.future!.data!.name!,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 22.sp,
@@ -131,7 +129,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             color: AppColors.font1Color),
                       ),
                       Text(
-                        detailsController.future!.data!.price!,
+                        controller.detailsController.future!.data!.price!,
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 16.sp,
@@ -155,7 +153,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             color: AppColors.font1Color),
                       ),
                       Text(
-                        detailsController.future!.data!.quantity!,
+                        controller.detailsController.future!.data!.quantity!,
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 16.sp,
@@ -177,7 +175,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   children: [
                     IconButton(
                         onPressed: () {
-                          cartController.addProductToCart(widget.cartModel!);
+                         // controller.cartController.removeFromCart(quantity: int.parse(quantity!),productId: productId!);
                         },
                         icon: Icon(Icons.remove_circle)),
                     SizedBox(
@@ -193,7 +191,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ),
                     IconButton(
                         onPressed: () {
-                          cartController.removeOneProduct(widget.cartModel!);
+                         // controller.cartController.removeOneProduct(widget.cartModel!);
                         },
                         icon: Icon(Icons.add_circle)),
                     SizedBox(
@@ -224,7 +222,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             padding: EdgeInsets.all(5),
                             shrinkWrap: true,
                             itemCount:
-                                detailsController.future!.data!.color!.length,
+                                controller.detailsController.future!.data!.color!.length,
                             itemBuilder: (context, idx) {
                               return GestureDetector(
                                 onTap: () {
@@ -262,7 +260,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 Padding(
                   padding: EdgeInsets.only(left: 20.w, right: 20.w),
                   child: Text(
-                    detailsController.future!.data!.description!,
+                    controller.detailsController.future!.data!.description!,
                     style: TextStyle(
                       fontSize: 15.sp,
                       color: AppColors.blackColor,
@@ -347,7 +345,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     .toString(),
                                 name: snapshot.data!.data![index].names!.en,
                                 favIcon: () {},
-                                icon: Icon(Icons.favorite),
+                                icon: Icon(Icons.favorite_border_outlined),
                               ),
                             ),
                           ),

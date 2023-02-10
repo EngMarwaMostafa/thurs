@@ -167,9 +167,6 @@ class SignupScreen extends StatelessWidget {
                       SizedBox(
                         height: 15.h,
                       ),
-                      /*   AppTextField(
-                        textEditingController: confirmPasswordController,
-                        hintText: 'Confirm Password'),*/
                       SizedBox(
                         height: 15.h,
                       ),

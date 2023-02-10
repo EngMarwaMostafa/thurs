@@ -1,8 +1,10 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:nib/controllers/products_controller.dart';
 import '../../../base/no_data_page.dart';
 import '../../../controllers/cart_controller.dart';
 import '../../../utils/app_colors.dart';
@@ -13,7 +15,7 @@ import '../home/home_page_body.dart';
 class ShoppingCartScreen extends StatelessWidget {
   ShoppingCartScreen({Key? key}) : super(key: key);
 
-  final controller = Get.find<CartController>();
+  final controller = Get.find<ProductsController>();
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class ShoppingCartScreen extends StatelessWidget {
       backgroundColor: AppColors.detailColor,
       body:
       Obx(() {
-        if (controller.cartsMap.isEmpty) {
+        if (controller.cartController.getItems.isNotEmpty) {
          return NoDataPage(text: 'Your Cart IS Empty');
        } else {
           return
@@ -57,14 +59,14 @@ class ShoppingCartScreen extends StatelessWidget {
                       child: ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: controller.cartsMap.length,
+                          itemCount: controller.cartController.getItems.length,
                           itemBuilder: (_, index) {
                             return CartItems(
                               // index: index,
-                              image: controller.cartsMap.values.toList()[index],
-                              name: controller.cartsMap.values.toList()[index],
+                              image: controller.cartController.getItems.toList()[index].toString(),
+                              name: controller.cartController.getItems.toList()[index].toString(),
                               quantity:
-                              controller.cartsMap.values.toList()[index],
+                              controller.cartController.getItems.toList()[index].toString(),
                             );
                           })),
                   SizedBox(

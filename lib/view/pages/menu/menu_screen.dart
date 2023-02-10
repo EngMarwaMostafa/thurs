@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:nib/view/pages/checkout/edit_profile_screen.dart';
 import '../../../utils/app_colors.dart';
 import '../about/abou_us_screen.dart';
 import '../auth/account_detail_screen.dart';
@@ -230,7 +231,7 @@ class MoreScreen extends StatelessWidget {
                   SizedBox(width: 14.w),
                   GestureDetector(
                     onTap: (){
-                      Get.to(AccountDetailScreen());
+                      Get.to(EditProfileScreen());
                     },
                     child: Text('Profile',style: TextStyle(
                       fontWeight: FontWeight.w600,fontSize: 15.sp,

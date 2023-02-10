@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:nib/controllers/cart_controller.dart';
+import 'package:nib/controllers/products_controller.dart';
 import 'package:nib/controllers/wishlist_controller.dart';
 import '../../utils/app_colors.dart';
 
@@ -37,8 +38,8 @@ class CardItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cartController = Get.put(CartController());
-    final wishController = Get.put(WishlistController());
+    final controller = Get.put(ProductsController());
+
 
     return Card(
       elevation: 1,
@@ -107,7 +108,7 @@ class CardItems extends StatelessWidget {
                 Text(
                   'SAR 300',
                   style: TextStyle(
-                    color: AppColors.sarColor,
+                    // color: AppColors.sarColor,
                     decoration: TextDecoration.lineThrough,
                   ),
                 ),
@@ -120,18 +121,19 @@ class CardItems extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-             /*   IconButton(
-                  onPressed: favIcon,
-                   icon:wishController.addToWish()
-                   ? const Icon(
-                    Icons.favorite,
-                     color: Colors.red,
-                   ):
-                  icon: icon!,
-                ),*/
+               IconButton(
+                  onPressed:(){
+                controller.wishlistController.addToWish(productId: productId);
+                },
+                 // ?  Icon(
+                 //    Icons.favorite,
+                 //   color: Colors.red,
+                 //  ):
+                  icon: Icon(Icons.favorite_border_outlined,color: AppColors.but1Color,),
+                ),
                 GestureDetector(
                   onTap: () {
-                    cartController.addToCart(quantity: int.parse(quantity!),productId: productId!);
+                   controller.cartController.addToCart(quantity: int.parse(quantity!),productId: productId!);
                   },
                   child: Container(
                     height: 40.h,
@@ -163,3 +165,4 @@ class CardItems extends StatelessWidget {
     );
   }
 }
+

@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../utils/app_constants.dart';
@@ -11,13 +10,19 @@ class ContactRepo{
   ContactRepo({required this.apiClient,
     required this.sharedPreferences});
 
-  String getUserAddress(){
-    return sharedPreferences.getString(AppConstants.USER_ADDRESS)??'';
+
+  Future<void>saveUserAddress(String fullName, String email, String phone,String fullAddress,String addressId,String addressName,String city,String state) async{
+    try{
+      await sharedPreferences.setString(AppConstants.FULLNAME, fullName);
+      await sharedPreferences.setString(AppConstants.USEREMAIL, email);
+      await sharedPreferences.setString(AppConstants.USERPHONE, phone);
+      await sharedPreferences.setString(AppConstants.FULLADDRESS, fullAddress);
+      await sharedPreferences.setString(AppConstants.ADDRESSID, addressId);
+      await sharedPreferences.setString(AppConstants.ADDRESSNAME, addressName);
+      await sharedPreferences.setString(AppConstants.CITY, city);
+      await sharedPreferences.setString(AppConstants.STATE, state);
+    }catch(e){
+      throw e;
+    }
   }
-
-  Future<bool> saveUserAddress(String address)async{
-    return await sharedPreferences.setString(AppConstants.USER_ADDRESS, address);
-  }
-
-
 }

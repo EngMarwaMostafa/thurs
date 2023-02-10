@@ -1,5 +1,6 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
+import 'package:nib/view/pages/auth/account_detail_screen.dart';
 import 'package:nib/view/pages/cart/shopping_cart_screen.dart';
 import 'package:nib/view/pages/details/product_detail_screen.dart';
 import 'package:nib/view/pages/offers/offers_screen.dart';
@@ -17,6 +18,7 @@ class RouteHelper{
   static const String details='/product_details';
   static const String offers='/offers';
   static const String cart='/cart';
+  static const String account='/account';
 
 
   static String getSplashPage() => '$splashPage';
@@ -26,6 +28,7 @@ class RouteHelper{
   static String getProductDetailsScreen() => "$details";
   static String getOffersScreen() => "$offers";
   static String getCartScreen() => "$cart";
+  static String getAccountDetailsScreen() => "$account";
 
 
   static List<GetPage> routes =[
@@ -59,11 +62,17 @@ class RouteHelper{
         }
     ),
     GetPage(
+        name:account,
+        page:(){
+          return AccountDetailScreen();
+        }
+    ),
+   /* GetPage(
         name:cart,
         page:(){
           return ShoppingCartScreen();
         }
-    ),
+    ),*/
 
   ];
 }

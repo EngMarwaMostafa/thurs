@@ -12,6 +12,14 @@ class AppConstants{
   static const String EMAIL= '';
   static const String USER_ADDRESS= 'contactinfo';
   static const String CART_LIST='cart-list';
+  static const String FULLNAME='full_name';
+  static const String USEREMAIL='user_email';
+  static const String USERPHONE='user_phone';
+  static const String FULLADDRESS='full_address';
+  static const String ADDRESSID='address_id';
+  static const String ADDRESSNAME='address_name';
+  static const String CITY='city';
+  static const String STATE='state';
 
 
 }

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import '../../models/categories_model.dart';
+import '../models/categories_model.dart';
 
 class CategoryServices{
 

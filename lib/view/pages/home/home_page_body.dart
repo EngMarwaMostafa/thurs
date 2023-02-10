@@ -4,12 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:nib/controllers/wishlist_controller.dart';
 import 'package:nib/models/wislist_model.dart';
 import 'package:nib/routes/router_helper.dart';
 import 'package:nib/view/pages/home/search_screen.dart';
-import '../../../controllers/cart_controller.dart';
-import '../../../controllers/product_details_controller.dart';
 import '../../../controllers/products_controller.dart';
 import '../../../models/categories_model.dart';
 import '../../../models/products_model.dart';
@@ -32,9 +29,6 @@ class _HomePageBodyState extends State<HomePageBody> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ProductsController());
-    final detailsController = Get.put(ProductDetailsController());
-    final cartController = Get.put(CartController());
-    final wishlistController = Get.put(WishlistController());
     final WishlistModel? wishlistModel;
 
     return Scaffold(
@@ -60,27 +54,31 @@ class _HomePageBodyState extends State<HomePageBody> {
                   width: 22.w,
                 ),
                 Obx(
-                    ()=>Badge(
-                      position: BadgePosition.topEnd(top:12,end: 3),
-                  animationDuration: Duration(milliseconds: 300),
-                  animationType: BadgeAnimationType.slide,
-                  badgeContent: Text(
-                cartController.quantity().toString(),
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                  child: GestureDetector(
-                    onTap: () {
-                      Get.to(() => ShoppingCartScreen());
-                    },
-                    child: const ImageIcon(
-                      AssetImage(
-                        'assets/app/cart.png',
+                  () => Badge(
+                    position: BadgePosition.topEnd(top: 12, end: 3),
+                    animationDuration: Duration(milliseconds: 300),
+                    animationType: BadgeAnimationType.slide,
+                    badgeContent: Text(
+            controller.cartController.totalItems.toString(),
+                   //   '20',
+                      style: const TextStyle(
+                        color: Colors.white,
                       ),
-                      color: Colors.white,
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                      Get.to(() => ShoppingCartScreen());
+                      },
+                      child: const ImageIcon(
+                        AssetImage(
+                          'assets/app/cart.png',
+                        ),
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
-                ), ],
+              ],
             ),
           ),
         ],
@@ -244,6 +242,9 @@ class _HomePageBodyState extends State<HomePageBody> {
                               image: snapshot.data!.data![index].coverImg,
                               quantity: snapshot.data!.data![index].quantity,
                               name: snapshot.data!.data![index].name!,
+                              favIcon: () {
+                                snapshot.data!.data![index].wishlist.toString();
+                              },
                             ),
                           ),
                         ),
@@ -328,10 +329,15 @@ class _HomePageBodyState extends State<HomePageBody> {
                             quantity:
                                 snapshot.data!.data![index].quantity.toString(),
                             name: snapshot.data!.data![index].names!.en,
-                              favIcon: () {},
-                              icon: Icon(Icons.favorite)),
+                            favIcon: () {
+                              snapshot.data!.data![index].wishlist.toString();
+                            },
+                            //icon: Icon(Icons.favorite),
+                            // controller.wishlistController.addToWish({int? productId}),
                           ),
-                      ),  );
+                        ),
+                      ),
+                    );
                   } else {
                     return const Center(child: CircularProgressIndicator());
                   }
